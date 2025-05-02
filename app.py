@@ -102,13 +102,13 @@ advice_text = {
 # チェックボックス入力画面（1ページ）
 scores = {}
 with st.form("check_form"):
-for taishitsu, items in types.items():
-st.subheader(f"{taishitsu}タイプのチェック")
-count = 0
-for item in items:
-if st.checkbox(item, key=f"{taishitsu}_{item}"):
-count += 1
-scores[taishitsu] = count
+for taishitsu, items in types.items(): #
+st.subheader(f"{taishitsu}タイプのチェック") #
+count = 0 #
+for item in items: #
+if st.checkbox(item, key=f"{taishitsu}_{item}"): #
+count += 1 #
+scores[taishitsu] = count #
 submitted = st.form_submit_button("診断する")
 
 # 診断結果の表示（別ページ）
