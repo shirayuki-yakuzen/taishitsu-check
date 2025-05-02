@@ -98,29 +98,27 @@ advice_text = {
 （✕辛いもの、油っこいもの、焼きすぎ・炒めすぎのもの）"""
 }
 
-
 # チェックボックス入力画面（1ページ）
 scores = {}
 with st.form("check_form"):
-for taishitsu, items in types.items(): #
-st.subheader(f"{taishitsu}タイプのチェック") #
-count = 0 #
-for item in items: #
-if st.checkbox(item, key=f"{taishitsu}_{item}"): #
-count += 1 #
-scores[taishitsu] = count #
-submitted = st.form_submit_button("診断する")
+    for taishitsu, items in types.items():
+        st.subheader(f"{taishitsu}タイプのチェック")
+        count = 0
+        for item in items:
+            if st.checkbox(item, key=f"{taishitsu}_{item}"):
+                count += 1
+        scores[taishitsu] = count
+    submitted = st.form_submit_button("診断する")
 
 # 診断結果の表示（別ページ）
 if submitted:
-max_score = max(scores.values())
-top_types = [k for k, v in scores.items() if v == max_score and v > 0]
+    max_score = max(scores.values())
+    top_types = [k for k, v in scores.items() if v == max_score and v > 0]
 
-if top_types:
-st.header("診断結果")
-for t in top_types:
-st.subheader(f"あなたは「{t}タイプ」です")
-st.markdown(advice_text.get(t, "アドバイスは後ほど表示されます。"))
-else:
-st.warning("どれもチェックが少ないようです。もう一度チェックしてください。")
-
+    if top_types:
+        st.header("診断結果")
+        for t in top_types:
+            st.subheader(f"あなたは「{t}タイプ」です")
+            st.markdown(advice_text.get(t, "アドバイスは後ほど表示されます。"))
+    else:
+        st.warning("どれもチェックが少ないようです。もう一度チェックしてください。")
